@@ -6,14 +6,15 @@ services:
         environment:
             POSTGRES_PASSWORD: 'secret'
         volumes:
-            - '${PWD}/db-data/:/var/lib/postgresql/data'
+            - './db-data/:/var/lib/postgresql/data'
+        user: '1000:1000'
     app_go:
         build:
             context: .
             dockerfile: Dockerfile
         image: app_go
         volumes:
-            - '${PWD}/blockchain.html:/blockchain.html'
+            - './blockchain.html:/blockchain.html'
         ports:
             - '8000:8000'
         depends_on:
