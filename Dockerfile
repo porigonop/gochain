@@ -3,13 +3,10 @@ COPY app.go .
 RUN go get -d -v \
         github.com/lib/pq \
         github.com/julienschmidt/httprouter
-RUN go build -o /go/build/app
-RUN ls
-RUN pwd
+RUN go build -o /app
 
-#FROM scratch
-
-#COPY --from=BUILDER /go/build/app /go/build/app
-EXPOSE 8000
-ENTRYPOINT ["/go/build/app"]
+# FROM scratch
+# COPY --from=BUILDER /app /app
+COPY blockchain.html /
+ENTRYPOINT ["/app"]
 
