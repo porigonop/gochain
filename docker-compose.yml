@@ -1,14 +1,19 @@
 version: '3.6'
+
 services:
     db:
         image: postgres
         environment:
             POSTGRES_PASSWORD: 'secret'
+        volumes:
+            - '${PWD}/db-data/:/var/lib/postgresql/data'
     app_go:
         build:
             context: .
             dockerfile: Dockerfile
         image: app_go
+        volumes:
+            - '${PWD}/blockchain.html:/blockchain.html'
         ports:
             - '8000:8000'
         depends_on:
